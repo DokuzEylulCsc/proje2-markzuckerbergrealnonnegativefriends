@@ -10,66 +10,127 @@ namespace Proje22019
     //IKI FARKLI VIEW VAR
     class GorunumYonetici
     {
-        public void KayitliMusteriler(List<Musteri> musteriler)
-        {
-            
 
+        public void GenelDurum(List<Otel> Oteller,List<Rezervasyon> Rezervasyonlar)
+        {
+
+            Console.WriteLine(Environment.NewLine + "--------Genel Durum--------");
+
+            List<Oda> doluOdalar = new List<Oda>();
             
-            foreach(Musteri m in musteriler)
+            foreach(Otel o in Oteller)
             {
-                Console.WriteLine(m.Ad + " " + m.Soyad + " " + m.ID);
+                bool control = true;
+                foreach (Rezervasyon r in Rezervasyonlar)
+                {
+                    
+                    if (r.otel==o.OtelAdi)
+                    {
+                        if(o.Odalar!=null)
+                        {
+                            foreach (Oda room in o.Odalar)
+                            {
+                                if (double.Parse(r.odaNo) == room.OdaNo)
+                                {
+                                    //Aynı dolu odayı tekrar tekrar doluOdalara eklemesin diye yaptık
+
+                                    
+                                    foreach (Oda x in doluOdalar)
+                                    {
+                                        if ((room.oteli == x.oteli) && (room.OdaNo == x.OdaNo))
+                                        {
+                                            control = false;
+                                        }
+                                    }
+                                    if (control == true)
+                                    {
+                                        doluOdalar.Add(room);
+                                    }
+                                    
+
+                                }
+                            }
+                        }
+                        
+
+                    }
+                }
+                Console.WriteLine(Environment.NewLine+o.OtelAdi + ";");
+
+                Console.WriteLine(Environment.NewLine+"Dolu Odalar;");
+
+                if(doluOdalar!=null)
+                {
+                    foreach (Oda oda in doluOdalar)
+                    {
+                        Console.WriteLine("OdaNo: " + oda.OdaNo + "   Kalan kisi sayisi sayisi: " + oda.Kisisayisi + "   Fiyat: " + oda.Fiyat);
+                    }
+
+                    Console.WriteLine(Environment.NewLine + "Toplam Dolu Oda Sayisi: " + doluOdalar.Count);
+                    
+                }
+                doluOdalar.Clear();
+
+
+
             }
-        }
-
-        public void VarolanOtelleriGoster()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Yoneticiler()
-        {
-            throw new NotImplementedException();
+            
         }
 
         
     }
+
+
+
     class GorunumMusteri
     {
-        public void UygunOtelleriGoster(List<Otel> o)
+        public void OdalariGoster(List<Oda> o,bool control)
         {
-            foreach (Otel otel in o)
-            {
-                if(otel is Hotel)
-                {
-                    Console.WriteLine(otel.OtelAdi + " " + otel.YildizSayisi + " " + otel.Sehir + " " +"(Hotel)");
-                }
-                if (otel is TatilKoyu)
-                {
-                    Console.WriteLine(otel.OtelAdi + " " + otel.YildizSayisi + " " + otel.Sehir + " " + "(TatilKoyu)");
-                }
-                if (otel is Pansiyon)
-                {
-                    Console.WriteLine(otel.OtelAdi + " " + otel.YildizSayisi + " " + otel.Sehir + " " + "(Pansiyon)");
-                }
+            int i = 0;
 
+            if(control==true)//Odalar boşsa bunu ekrana yazdırsın
+            {
+                Console.WriteLine(Environment.NewLine+"Aradiginiz kriterlerdeki boş odalar;"+Environment.NewLine);
+            }
+                      
+            foreach (Oda oda in o)
+            {
+                Console.WriteLine(i.ToString() + "-" + oda.oteli.Sehir + " " + oda.oteli.OtelAdi +
+                    " Yildiz:" + oda.oteli.YildizSayisi +
+                    " OdaNo:" + oda.OdaNo
+                    + " Fiyat:" + oda.Fiyat);
+
+                i++;
             }
         }
 
-        public void KayitliRezervasyonlar(string ID)
+        public void GecmisRezervasyonlar(List<Rezervasyon> GecmisRezervasyonlar)//Müşterinin kendi dosyasındaki rezervasyonları ekrana basıcak
         {
-            string line;
-            FileStream akis;
-            StreamReader Okuma;
-
-            string Yol = ID + ".txt";//Kisinin Rezervasyonlarının bulunduğu dosya
-            akis = new FileStream(Yol, FileMode.Open, FileAccess.Read);
-            Okuma = new StreamReader(akis);
-
-            line = Okuma.ReadLine();
-
-            while (line != null)
+            int i = 1;
+            if(GecmisRezervasyonlar.Count==0)
             {
-                line = Okuma.ReadLine();
+                Console.WriteLine(Environment.NewLine + "Gecmis rezervasyonunuz bulunmamaktadir!");
+            }
+            foreach (Rezervasyon r in GecmisRezervasyonlar)
+            {
+                
+                    Console.WriteLine(i + "  Sehir:" + r.sehir + "  Otel:" + r.otel + "  OdaNo:"
+                        + r.odaNo + "  BaslangicTarihi:" + r.Baslangıc + "  CikisTarihi:" + r.Cikis);
+                    i++;
+                
+            }
+        }
+
+        public void GuncelRezervasyonlar(List<Rezervasyon> GuncelRezervasyonlar)//Müşterinin kendi dosyasındaki rezervasyonları ekrana basıcak
+        {
+            int i = 1;
+            foreach (Rezervasyon r in GuncelRezervasyonlar)
+            {
+
+                Console.WriteLine(i + "  Sehir:" + r.sehir + "  Otel:" + r.otel + "  OdaNo:"
+                    + r.odaNo + "  BaslangicTarihi:" + r.Baslangıc + "  CikisTarihi:" + r.Cikis);
+                i++;
+
             }
         }
     }
