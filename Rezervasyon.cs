@@ -21,6 +21,7 @@ namespace Proje22019
 
         public Rezervasyon(DateTime b,DateTime c,DateTime iS,string otel,string odaNo,string sehir,string isim,string soyisim,string id)
         {
+            //Rezervasyon yapılandırıcısı.
             this.Baslangıc = b;
             this.Cikis = c;
             this.islemSaati = iS;

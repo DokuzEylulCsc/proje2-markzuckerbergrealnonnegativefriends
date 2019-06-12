@@ -15,11 +15,21 @@ namespace Proje22019
         static void Main(string[] args)
         {
             
-            
+            //Yönetici ıd=123 yönetici sifre=123
+            //Yönetici singleton yapildi
+
+
+
+
+
+
             //PROGRAM BAŞLATILDIĞINDA MUSTERİLER ve OTELLER LİSTELERİ OLUŞTURULUP DATABASE DEKİ VERİLERİ ÇEKECEK
             //BU İŞLEMLER MAİNDE GEREKSİZ YER KAPLAMAMASI İÇİN BaslangicDosyaIslemleri ADLI SINIFIN STATIC METODLARINDA YAPILACAKTIR
 
-            Yonetici boss = Yonetici.Yeni("Mert","Erdem","123","123");
+            Yonetici boss = Yonetici.Yeni("Burak","Gomec","123","123");
+
+
+
 
             List<Musteri> Musteriler = new List<Musteri>();
             List<Otel> Oteller = new List<Otel>();
@@ -37,8 +47,7 @@ namespace Proje22019
 
             
 
-            //Tarih sonra mı alınmalı direkt mi alınmalı ??
-            //----------------------------------------------------------------------------------------------------
+          
 
             //2 vıew 2 adet controller
 
@@ -49,16 +58,16 @@ namespace Proje22019
             ControllerMusteri C;
             ControllerYonetici Y;
 
-        //  MVC kullanılacak (3 farklı model in kullanabileceği bir yapı olucak
+            //  MVC kullanılacak (3 farklı model in kullanabileceği bir yapı olucak
 
 
-             Tekrar: //goto tekrar icin kalacak.
-
+            Tekrar: //goto tekrarı icin
+            
             //CONSOLE İŞLEMLERİNİN BAŞLADIĞI YER ( ANA YAPI )
             try
             {
             
-                Console.WriteLine("Otel Rezervasyon Sistemine Hosgeldiniz");
+                Console.WriteLine(Environment.NewLine+"Otel Rezervasyon Sistemine Hosgeldiniz");
                 Console.WriteLine(Environment.NewLine + "1-Kayit Ol");
                 Console.WriteLine("2-Giris Yap");
 
@@ -111,7 +120,7 @@ namespace Proje22019
                                                 
 
 
-                                                C.UygunOdalar(Oteller);
+                                                C.UygunOdalar(Oteller,Rezervasyonlar);
                                                 //başlangıçtaki rezervasyonlar listesinin değiştirilmiş hali şuan kontrollerda
 
 
@@ -160,7 +169,7 @@ namespace Proje22019
 
 
 
-                                    }//if
+                                    }
                                     else if (m.ID == ID && m.Sifre != sifre)
                                     {
                                         Console.WriteLine(Environment.NewLine + "Hatali sifre!!!!");
@@ -204,8 +213,8 @@ namespace Proje22019
                                     {
 
                                         case 1:
-
-                                            Oteller = Y.OtelEkle();//Cunku oteller listesi değişti eklenince
+                                            //Oteller listesi degisti
+                                            Oteller = Y.OtelEkle();
 
                                             break;
 
@@ -216,7 +225,7 @@ namespace Proje22019
                                             break;
 
                                         default:
-                                            Y.GenelDurum();
+                                            Y.GenelDurum(Rezervasyonlar);
                                             goto Tekrar2;
                                            
 
@@ -246,7 +255,7 @@ namespace Proje22019
                         }
                         break;
 
-                    default://ana sw icin default
+                    default://Ana switch case icin default
                         Console.WriteLine("Yanlıs tuş girdiniz tekrar tuşlayiniz\n");
                         goto Tekrar;
 
@@ -258,8 +267,7 @@ namespace Proje22019
             }
             catch (FormatException)
             {
-                //Burası tekrar düzenlenebilir en basa atıyor bosluk enter girince ama o zamanda birden
-                //fazla try catch yapmamız lazım!!
+                //Tekrar en basa dönülüyor hatalı bir giriste
                 Console.WriteLine("Giris dizisini sayi olarak tuslayiniz(Bosluk ve enter girmeyiniz)\n");
                 goto Tekrar;
 

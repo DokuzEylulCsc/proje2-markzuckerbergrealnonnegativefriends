@@ -18,8 +18,7 @@ namespace Proje22019
         public bool jakuzi { get; set; }
         public bool oyunKonsolu { get; set; }
 
-        public DateTime bTarihi { get; set; }
-        public DateTime cTarihi { get; set; }
+        
 
         public double OdaNo { get; set; }//ÖZGÜN
         public double Fiyat { get; set; }
@@ -30,7 +29,7 @@ namespace Proje22019
     class KralDairesi:Oda //herşey var
     {
         public KralDairesi(Otel oteli,bool klima, bool minibar, bool tv, bool denizmanzarasi, bool jakuzi,
-            bool oyunkonsolu,double odano, double fiyat,DateTime btarihi,DateTime ctarihi,double kisisayisi)
+            bool oyunkonsolu,double odano, double fiyat,double kisisayisi)
         {
             base.klima = klima;
             base.miniBar = minibar;
@@ -43,15 +42,14 @@ namespace Proje22019
             base.Fiyat = fiyat;
             base.oteli = oteli;
 
-            base.bTarihi = btarihi;
-            base.cTarihi = ctarihi;
+            
             base.Kisisayisi = kisisayisi;
         }
     }
     class LuxOda:Oda
     {
         public LuxOda(Otel oteli,bool klima,bool minibar,bool tv,bool denizmanzarasi,bool jakuzi,
-            bool oyunkonsolu,double odano,double fiyat, DateTime btarihi, DateTime ctarihi,double kisisayisi)
+            bool oyunkonsolu,double odano,double fiyat,double kisisayisi)
         {
             base.klima = klima;
             base.miniBar = minibar;
@@ -64,15 +62,14 @@ namespace Proje22019
             base.Fiyat = fiyat;
             base.oteli = oteli;
 
-            base.bTarihi = btarihi;
-            base.cTarihi = ctarihi;
+            
             base.Kisisayisi = kisisayisi;
         }
     }
     class StandartOda:Oda
     {
         public StandartOda(Otel oteli,bool klima, bool minibar, bool tv, bool denizmanzarasi, bool jakuzi,
-            bool oyunkonsolu, double odano, double fiyat, DateTime btarihi, DateTime ctarihi,double kisisayisi)
+            bool oyunkonsolu, double odano, double fiyat,double kisisayisi)
         {
             base.klima = klima;
             base.miniBar = minibar;
@@ -85,8 +82,7 @@ namespace Proje22019
             base.Fiyat = fiyat;
             base.oteli = oteli;
 
-            base.bTarihi = btarihi;
-            base.cTarihi = ctarihi;
+            
             base.Kisisayisi = kisisayisi;
         }
     }

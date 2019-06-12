@@ -1,9 +1,19 @@
-Continental KralDairesi True True True True True True 230 1000 15.10.2019 20.10.2019 1
-Continental LuxOda True True True True False False 223 600 10.10.1950 9.6.2019 2
-Continental StandartOda True True True False False False 260 400 10.10.1950 10.10.1950 1
-wTinaztepew LuxOda True True True False False True 103 960 10.10.1950 9.6.2019 2
-wTinaztepew StandartOda True True True False False False 230 560 10.10.1950 9.6.2019 2
-wTinaztepew LuxOda True True True False False True 560 1300 10.10.1950 9.6.2019 2
-wTinaztepew KralDairesi True True True True False True 540 2400 10.10.1950 10.10.1950 1
-cry LuxOda True True True True True False 5 560 10.10.1950 10.10.1950 2
-cry StandartOda True True True True True True 6 345 10.10.1950 10.10.1950 1
+Continental KralDairesi True True True True True True 230 1000 1
+Continental LuxOda True True True True False False 223 600 2
+Continental StandartOda True True True False False False 260 400 1
+Continental LuxOda False True True False True False 400 800 3
+wTinaztepew LuxOda True True True False False True 103 960 2
+wTinaztepew StandartOda True True True False False False 230 560 2
+wTinaztepew LuxOda True True True False False True 560 1300 2
+wTinaztepew KralDairesi True True True True False True 540 2400 1
+wTinaztepew StandartOda False False True True True True 150 500 2
+cry LuxOda True True True True True False True 5 560 2
+cry StandartOda True True True True True True 6 345 1
+cry StandartOda False True False True False False 10 400 2
+Athena KralDairesi True False True True True True 500 1500 2
+Awiation LuxOda False False True False True False 300 700 4
+Stay LuxOda True True False False True True 400 800 3
+Stay StandartOda False False False True True False 200 700 2
+Joke LuxOda True True True False False False 300 600 2
+Joke StandartOda False False False True False False 200 500 1
+
