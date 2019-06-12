@@ -13,7 +13,7 @@ namespace Proje22019
         {
             switch (tip)
             {
-                case 1:
+                case 1://Hotel
 
 
                     Console.WriteLine(Environment.NewLine + "Otel Adi:");
@@ -30,7 +30,7 @@ namespace Proje22019
 
                     break;
 
-                case 2:
+                case 2://TatilKoyu
 
 
                     Console.WriteLine(Environment.NewLine + "Otel Adi:");
@@ -46,7 +46,7 @@ namespace Proje22019
 
                     break;
 
-                case 3:
+                case 3://Pansiyon
 
 
                     Console.WriteLine(Environment.NewLine + "Otel Adi:");
