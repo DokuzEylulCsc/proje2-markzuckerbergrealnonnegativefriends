@@ -6,23 +6,26 @@ using System.Threading.Tasks;
 
 namespace Proje22019
 {
+    //Kişiler abstract class ından türetilmiş classlar
     abstract class Kisiler
     {
         
         public string Ad { get; set; }
         public string Soyad { get; set; }
         public string ID { get; set; }       
+
+        public string Sifre { get; set; }
     }
 
     class Musteri:Kisiler
     {
         
-        public Musteri(string ad,string soyad,string id)
+        public Musteri(string ad,string soyad,string id,string sifre)
         {
             base.Ad = ad;
             base.Soyad = soyad;
             base.ID = id;
-            
+            base.Sifre = sifre;
         }
     }
 
@@ -32,11 +35,11 @@ namespace Proje22019
         //SINGLETON
         private static Yonetici boss=null;
 
-        public static Yonetici Yeni(string ad,string soyad,string id)
+        public static Yonetici Yeni(string ad,string soyad,string id,string sifre)
         {
                if (boss == null)
                {
-                   boss = new Yonetici(ad,soyad,id);
+                   boss = new Yonetici(ad,soyad,id,sifre);
                    
                }
                return boss;
@@ -44,11 +47,13 @@ namespace Proje22019
 
         }
         
-        private Yonetici(string ad, string soyad, string id)
+        private Yonetici(string ad, string soyad, string id,string sifre)
         {
             base.Ad = ad;
             base.Soyad = soyad;
             base.ID = id;
+            base.Sifre = sifre;
+
             
         }
     }

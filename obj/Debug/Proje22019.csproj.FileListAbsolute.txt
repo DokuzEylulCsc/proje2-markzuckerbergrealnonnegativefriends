@@ -12,3 +12,10 @@ C:\Users\Alice\Downloads\Proje22019\Proje22019\obj\Debug\Proje22019.csprojAssemb
 C:\Users\Alice\Downloads\Proje22019\Proje22019\obj\Debug\Proje22019.csproj.CoreCompileInputs.cache
 C:\Users\Alice\Downloads\Proje22019\Proje22019\obj\Debug\Proje22019.exe
 C:\Users\Alice\Downloads\Proje22019\Proje22019\obj\Debug\Proje22019.pdb
+C:\Users\Alice\Documents\GitHub\proje2-markzuckerbergrealnonnegativefriends\bin\Debug\Proje22019.exe.config
+C:\Users\Alice\Documents\GitHub\proje2-markzuckerbergrealnonnegativefriends\bin\Debug\Proje22019.exe
+C:\Users\Alice\Documents\GitHub\proje2-markzuckerbergrealnonnegativefriends\bin\Debug\Proje22019.pdb
+C:\Users\Alice\Documents\GitHub\proje2-markzuckerbergrealnonnegativefriends\obj\Debug\Proje22019.csprojAssemblyReference.cache
+C:\Users\Alice\Documents\GitHub\proje2-markzuckerbergrealnonnegativefriends\obj\Debug\Proje22019.csproj.CoreCompileInputs.cache
+C:\Users\Alice\Documents\GitHub\proje2-markzuckerbergrealnonnegativefriends\obj\Debug\Proje22019.exe
+C:\Users\Alice\Documents\GitHub\proje2-markzuckerbergrealnonnegativefriends\obj\Debug\Proje22019.pdb
