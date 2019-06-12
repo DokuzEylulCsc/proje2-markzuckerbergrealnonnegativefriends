@@ -10,70 +10,34 @@ namespace Proje22019
 {
     class Program
     {
+        
+        
         static void Main(string[] args)
         {
-            //PROGRAM BAŞLATILDIĞINDA MUSTERİLER VE OTELLER LİSTELERİ OLUŞTURULUP DATABASE DEKİ VERİLERİ ÇEKECEK
+            
+            
+            //PROGRAM BAŞLATILDIĞINDA MUSTERİLER ve OTELLER LİSTELERİ OLUŞTURULUP DATABASE DEKİ VERİLERİ ÇEKECEK
+            //BU İŞLEMLER MAİNDE GEREKSİZ YER KAPLAMAMASI İÇİN BaslangicDosyaIslemleri ADLI SINIFIN STATIC METODLARINDA YAPILACAKTIR
+
+            Yonetici boss = Yonetici.Yeni("Mert","Erdem","123","123");
 
             List<Musteri> Musteriler = new List<Musteri>();
-
-            string[] gelen;
-            string line;
-            FileStream akis;
-            StreamReader Okuma;
-            string Yol = "Musteriler.txt";
-            akis = new FileStream(Yol, FileMode.Open, FileAccess.Read);
-            Okuma = new StreamReader(akis);
-            line = Okuma.ReadLine();
-
-            while (line != null)
-            {
-                gelen = Regex.Split(line, @"\s+");
-                Musteri yeni = new Musteri(gelen[0], gelen[1], gelen[2]);
-                Musteriler.Add(yeni);
-                yeni = null;
-                line = Okuma.ReadLine();
-            }
-            akis.Close();
-
-
-
-
             List<Otel> Oteller = new List<Otel>();
+            List<Rezervasyon> Rezervasyonlar = new List<Rezervasyon>();
 
-            string[] Gelen;
-            string Line;
-            FileStream Akis;
-            StreamReader okuma;
-            string yol = "Oteller.txt";
-            Akis = new FileStream(yol, FileMode.Open, FileAccess.Read);
-            okuma = new StreamReader(Akis);
-            Line = okuma.ReadLine();
+            Musteriler = BaslangicDosyaIslemleri.VeriTabanindakiMusteriler();
+            Oteller = BaslangicDosyaIslemleri.VeriTabanindakiOteller();
+            BaslangicDosyaIslemleri.VeriTabanindakiOdalar(Oteller);//İlgili otellerin odalar listelerini dolduracak
+            
+            //Sisteme kayıtlı olan tüm rezervasyonlar bu list e dönücek
+            Rezervasyonlar = BaslangicDosyaIslemleri.VeriTabanindakiRezervasyonlar();
 
-            while (Line != null)
-            {
-                Gelen = Regex.Split(Line, @"\s+");
-                if (Gelen[3] == "Hotel")
-                {
-                    Hotel yeni = new Hotel(Gelen[0], Gelen[1], double.Parse(Gelen[2]));
-                    Oteller.Add(yeni);
-                }
-                else if (Gelen[3] == "TatilKoyu")
-                {
-                    TatilKoyu yeni = new TatilKoyu(Gelen[0], Gelen[1]);
-                    Oteller.Add(yeni);
-                }
-                else if (Gelen[3] == "Pansiyon")
-                {
-                    Pansiyon yeni = new Pansiyon(Gelen[0], Gelen[1]);
-                    Oteller.Add(yeni);
-                }
+            
+            
 
+            
 
-
-
-                Line = okuma.ReadLine();
-            }
-            Akis.Close();
+            //Tarih sonra mı alınmalı direkt mi alınmalı ??
             //----------------------------------------------------------------------------------------------------
 
             //2 vıew 2 adet controller
@@ -82,111 +46,224 @@ namespace Proje22019
             GorunumMusteri gm = new GorunumMusteri();
             GorunumYonetici gy = new GorunumYonetici();
 
-            ControllerMusteri C = new ControllerMusteri(gm);
-            ControllerYonetici Y = new ControllerYonetici(gy);
+            ControllerMusteri C;
+            ControllerYonetici Y;
 
-            //  MVC kullanılacak (3 farklı model in kullanabileceği bir yapı olucak
-
-
+        //  MVC kullanılacak (3 farklı model in kullanabileceği bir yapı olucak
 
 
-            //CONSOLE İŞLEMLERİNİN BAŞLADIĞI YER
-            Console.WriteLine("Otel Rezervasyon Sistemine Hosgeldiniz");
-            Console.WriteLine("1-Kayit Ol");
-            Console.WriteLine("2-Giris Yap");
-            
-            switch(int.Parse(Console.ReadLine()))
+             Tekrar: //goto tekrar icin kalacak.
+
+            //CONSOLE İŞLEMLERİNİN BAŞLADIĞI YER ( ANA YAPI )
+            try
             {
-                case 1:// KAYIT KISMI
-                    string isim;
-                    string soyisim;
-                    string id;
+            
+                Console.WriteLine("Otel Rezervasyon Sistemine Hosgeldiniz");
+                Console.WriteLine(Environment.NewLine + "1-Kayit Ol");
+                Console.WriteLine("2-Giris Yap");
 
-                    Console.WriteLine("Isminiz: ");
-                    isim = Console.ReadLine();
-                    Console.WriteLine("SoyIsminiz: ");
-                    soyisim = Console.ReadLine();
-                    Console.WriteLine("ID(T.C No): ");
-                    id = Console.ReadLine();
+                switch (int.Parse(Console.ReadLine()))
+                {
+                    case 1:// KAYIT KISMI
+
+                        C = new ControllerMusteri(gm, null, Rezervasyonlar);
+                        C.KayitOl(Musteriler);
+
+                        goto case 2;
+
+                    case 2://GİRİŞ KISMI
+                        Tekrar3:
+                        Console.WriteLine(Environment.NewLine + "1-Musteri Girisi");
+                        Console.WriteLine("2-Yonetici Girisi");
+
+
+                        switch (int.Parse(Console.ReadLine()))
+                        {
+                            case 1://MUSTERİ GİRİŞİ
+                                string ID;
+                                Console.WriteLine(Environment.NewLine + "Lutfen ID nizi giriniz:");
+                                ID = Console.ReadLine();
+                                bool control = false;//ID sisteme kayıtlımı???
+                                Console.WriteLine(Environment.NewLine + "Lutfen Sifrenizi giriniz:");
+                                string sifre = Console.ReadLine();
 
 
 
-                    break;
+                                //MusteriDosyaOku metodu bir musteri listesi dönücek
 
-
-                case 2://GİRİŞ KISMI
-                    Console.WriteLine("1-Musteri Girisi");
-                    Console.WriteLine("2-Yonetici Girisi");
-                    
-
-                    switch(int.Parse(Console.ReadLine()))
-                    {
-                        case 1://MUSTERİ GİRİŞİ
-                            string ID;
-                            Console.WriteLine("Lutfen ID nizi giriniz:");
-                            ID = Console.ReadLine();
-                            bool control = false;//ID sisteme kayıtlımı???
-
-                            //MusteriDosyaOku metodu bir musteri listesi dönücek
-
-                            foreach(Musteri m in Musteriler)
-                            {
-                                if(m.ID==ID)
+                                foreach (Musteri m in Musteriler)
                                 {
-                                    control = true;//ID bulundu
-                                    Console.WriteLine(m.Ad + " " + m.Soyad + " sisteme Hosgeldiniz"+Environment.NewLine);
-                                    Console.WriteLine("1-Otel Ara"+Environment.NewLine+"2-Rezervasyon yap"+Environment.NewLine+
-                                        "3-Guncel rezervasyonumu/larimi iptal et"+Environment.NewLine+
-                                        "4-Rezervasyonlarimi goruntule");
-
-                                    switch(int.Parse(Console.ReadLine()))
+                                    if (m.ID == ID && m.Sifre == sifre)
                                     {
-                                        case 1:
-                                            string sehir;
-                                            string yildizS;
-                                            
-                                            Console.WriteLine("Sehir:");
-                                            sehir=Console.ReadLine();
-                                            Console.WriteLine("Yildiz:");
-                                            yildizS = Console.ReadLine();
+                                        
 
-                                            C.UygunOteller(sehir, yildizS,Oteller);//Controller ın UygunOteller metoduna gidicek
+                                        control = true;
+                                        C = new ControllerMusteri(gm, m, Rezervasyonlar);//MÜŞTERİYE AİT BİR CONTROLLER AÇILDI
+                                        Tekrar4:
+                                        Console.WriteLine(m.Ad + " " + m.Soyad + " sisteme Hosgeldiniz" + Environment.NewLine);
+                                        Console.WriteLine("1-Otel Ara" + Environment.NewLine +
+                                            "2-Guncel rezervasyonumu/larimi iptal et" + Environment.NewLine +
+                                            "3-Guncel Rezervasyonlarimi goruntule"+Environment.NewLine+"4-Gecmis Rezervasyonlarimi goruntule");
 
-                                            
-                                            
-                                            
+                                        switch (int.Parse(Console.ReadLine()))
+                                        {
+                                            case 1:
+                                                
 
-                                            break;
-                                        case 2:
-                                            break;
-                                        case 3:
-                                            break;
+
+                                                C.UygunOdalar(Oteller);
+                                                //başlangıçtaki rezervasyonlar listesinin değiştirilmiş hali şuan kontrollerda
+
+
+
+
+
+                                                goto Tekrar4;//Rezervasyon yaptı peki başka bir isteği varmı?
+
+
+
+
+
+
+                                                break;
+
+
+                                            case 2://Rezervasyon İptali
+
+                                                C.RezervasyonIptali();
+
+                                                goto Tekrar4;
+
+                                                break;
+
+
+                                            case 3:
+                                                C.GuncelRezervasyonlarim();
+                                                goto Tekrar4
+                                                    ;
+
+                                                break;
+
+                                            case 4:
+
+                                                C.GecmisRezervasyonlarim();
+                                                goto Tekrar4;
+
+                                                break;
+
+                                            default:
+                                                Console.WriteLine("Yanlıs tuş girdiniz tekrar tuşlayiniz\n");
+                                                goto Tekrar4;
+
+                                                
+                                        }//switch
+
+
+
+                                    }//if
+                                    else if (m.ID == ID && m.Sifre != sifre)
+                                    {
+                                        Console.WriteLine(Environment.NewLine + "Hatali sifre!!!!");
+                                        goto case 1;
 
                                     }
-                                    
 
-                                    
+
+
                                 }
-                            }
-                            if(control==false)
-                            {
-                                Console.WriteLine(ID + " ID li herhangi bir kullanici yok!");
-                                goto case 1;//case 1 i tekrarlar
-                            }
-                            //kullanıcı ıd sini girdikten sonra dosya okuma işlemi yapılacak sonra ordan gelen
-                            //list içinde o ıd de biri varsa sisteme sorunsuz giriş yapıcak
-                            //yoksa exception handling yapılacak
+                                if (control == false)
+                                {
+                                    Console.WriteLine(Environment.NewLine + "Kullanici bulunamadi");
+                                    goto case 1;
+                                }
+
+                                //kullanıcı ıd sini girdikten sonra dosya okuma işlemi yapılacak sonra ordan gelen
+                                //list içinde o ıd de biri varsa sisteme sorunsuz giriş yapıcak
+                                //yoksa exception handling yapılacak
 
 
-                            break;//...
+                                break;//...
 
-                        case 2://YONETİCİ GİRİŞİ
-                            break;
-                    }
-                    break;
+                            case 2://YONETİCİ GİRİŞİ
+                                Console.WriteLine(Environment.NewLine + "ID:");
+                                string id = Console.ReadLine();
+                                Console.WriteLine(Environment.NewLine + "Sifre:");
+                                string parola = Console.ReadLine();
+
+                                if (boss.ID == id && boss.Sifre == parola)
+                                {
+
+
+                                    Y = new ControllerYonetici(gy, Oteller);
+
+                                Tekrar2:
+                                    Console.WriteLine(Environment.NewLine + "1-Otel ekle" + Environment.NewLine +
+                                        "2-Istedigin bir otele oda ekle"+Environment.NewLine+"3-Otellerin Genel Durumlari");
+                                  
+                                    switch (int.Parse(Console.ReadLine()))
+                                    {
+
+                                        case 1:
+
+                                            Oteller = Y.OtelEkle();//Cunku oteller listesi değişti eklenince
+
+                                            break;
+
+                                        case 2:
+
+                                            Y.OteleOdaEkle();
+
+                                            break;
+
+                                        default:
+                                            Y.GenelDurum();
+                                            goto Tekrar2;
+                                           
+
+
+                                    }
+                                }
+                                else if (boss.ID == id && boss.Sifre != parola)
+                                {
+                                    Console.WriteLine(Environment.NewLine + "Hatali sifre Boss!!!");
+                                    goto case 2;
+                                }
+                                else if (boss.ID != id)
+                                {
+                                    Console.WriteLine(Environment.NewLine + "Yanlis ID");
+                                    goto case 2;
+                                }
+
+
+
+                                break;
+
+
+                            default:
+                                
+                                goto Tekrar3;
+
+                        }
+                        break;
+
+                    default://ana sw icin default
+                        Console.WriteLine("Yanlıs tuş girdiniz tekrar tuşlayiniz\n");
+                        goto Tekrar;
+
+
+
+
+
+                }
+            }
+            catch (FormatException)
+            {
+                //Burası tekrar düzenlenebilir en basa atıyor bosluk enter girince ama o zamanda birden
+                //fazla try catch yapmamız lazım!!
+                Console.WriteLine("Giris dizisini sayi olarak tuslayiniz(Bosluk ve enter girmeyiniz)\n");
+                goto Tekrar;
 
             }
-            
         }
     }
 }
